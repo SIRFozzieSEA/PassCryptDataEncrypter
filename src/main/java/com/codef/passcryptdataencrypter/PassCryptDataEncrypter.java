@@ -58,7 +58,7 @@ public class PassCryptDataEncrypter {
 	private static final String DATA_IN_FOLDER = DATA_DRIVE_AND_FOLDER + "IN\\";
 	private static final String DATA_OUT_FOLDER = DATA_DRIVE_AND_FOLDER + "OUT\\";
 
-	private static final String XML_DATA_FILE_TEMPLATE = "CryptPasswords.xml";
+	private static final String XML_DATA_FILE_TEMPLATE = "Site Passwords.xml";
 	private static final String XML_DATA_FILE_FOR_PASSCRYPT = "site_passwords_secure.xml";
 
 	private static final String EXPORT_FOR_PHONE_CONSTANT = "Export_For_Phone";
