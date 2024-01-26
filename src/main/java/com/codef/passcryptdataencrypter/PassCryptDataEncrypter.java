@@ -49,14 +49,16 @@ public class PassCryptDataEncrypter {
 
 	/* Safe to configure as needed */
 	private static String PASSWORD_FOR_PASSCRYPT_APP = "bobolala69!";
-	private static String DATA_IN_FOLDER = "C:\\GitRepos\\PassCryptDataEncrypter\\src\\main\\resources\\";
-	private static String DATA_OUT_FOLDER = "E:\\PassCryptDataEncrypter_OUT\\";
+	private static String DATA_FOLDER = "E:\\PassCryptDataEncrypter\\";
+	private static String DATA_IN_FOLDER = DATA_FOLDER + "IN\\";
+	private static String DATA_OUT_FOLDER = DATA_FOLDER + "OUT\\";
+	private static final boolean DO_HOME_LOCATION = false;
 
 	/* probably don't want to mess with these */
 	private static final String ALGORITHM = "AES";
 	private static final int KEY_LENGTH = 128;
 
-	private static final String XML_DATA_FILE_TEMPLATE = "Site Passwords.xml";
+	private static final String XML_DATA_FILE_TEMPLATE = "SitePasswords.xml";
 	private static final String XML_DATA_FILE_FOR_PASSCRYPT = "site_passwords_secure.xml";
 
 	private static final String EXPORT_FOR_PHONE_CONSTANT = "Export_For_Phone";
@@ -68,10 +70,9 @@ public class PassCryptDataEncrypter {
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
 
-		boolean defaultLocation = true;
-		if (!defaultLocation) {
-			DATA_IN_FOLDER = "";
-			DATA_OUT_FOLDER = "";
+		if (DO_HOME_LOCATION) {
+			DATA_IN_FOLDER = "E:\\Documents\\Personal\\";
+			DATA_OUT_FOLDER = "C:\\GitRepos\\PassCrypt\\app\\src\\main\\res\\raw\\";
 		}
 
 		// These are my standard cleanup lines in my template
@@ -88,8 +89,12 @@ public class PassCryptDataEncrypter {
 	}
 
 	public static void buildSampleResourcesAndFolder() throws IOException {
-		makeDirectory(DATA_IN_FOLDER);
-		makeDirectory(DATA_OUT_FOLDER);
+
+		if (!DO_HOME_LOCATION) {
+			makeDirectory(DATA_FOLDER);
+			makeDirectory(DATA_IN_FOLDER);
+			makeDirectory(DATA_OUT_FOLDER);
+		}
 
 		File testFile = new File(DATA_IN_FOLDER + XML_DATA_FILE_TEMPLATE);
 		if (!testFile.exists()) {
