@@ -48,15 +48,13 @@ import org.w3c.dom.Text;
 public class PassCryptDataEncrypter {
 
 	/* Safe to configure as needed */
-	private static final String DATA_DRIVE_AND_FOLDER = "E:\\PassCryptDataEncrypter\\";
-	private static final String PASSWORD_FOR_PASSCRYPT_APP = "bobolala69!";
+	private static String PASSWORD_FOR_PASSCRYPT_APP = "bobolala69!";
+	private static String DATA_IN_FOLDER = "C:\\GitRepos\\PassCryptDataEncrypter\\src\\main\\resources\\";
+	private static String DATA_OUT_FOLDER = "E:\\PassCryptDataEncrypter_OUT\\";
 
 	/* probably don't want to mess with these */
 	private static final String ALGORITHM = "AES";
 	private static final int KEY_LENGTH = 128;
-
-	private static final String DATA_IN_FOLDER = DATA_DRIVE_AND_FOLDER + "IN\\";
-	private static final String DATA_OUT_FOLDER = DATA_DRIVE_AND_FOLDER + "OUT\\";
 
 	private static final String XML_DATA_FILE_TEMPLATE = "Site Passwords.xml";
 	private static final String XML_DATA_FILE_FOR_PASSCRYPT = "site_passwords_secure.xml";
@@ -70,6 +68,12 @@ public class PassCryptDataEncrypter {
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
 
+		boolean defaultLocation = true;
+		if (!defaultLocation) {
+			DATA_IN_FOLDER = "";
+			DATA_OUT_FOLDER = "";
+		}
+
 		// These are my standard cleanup lines in my template
 		cleanupLinesThatContain.add(ENCRYPTED_CONST); // do not remove this one
 		cleanupLinesThatContain.add(EXPORT_FOR_PHONE_CONSTANT); // do not remove this one
@@ -78,13 +82,12 @@ public class PassCryptDataEncrypter {
 		buildSampleResourcesAndFolder();
 		copyXMLDocumentForExport();
 		handleCryptsAndCleanXMLDoc();
-		
+
 		System.out.println("Done!");
 
 	}
 
 	public static void buildSampleResourcesAndFolder() throws IOException {
-		makeDirectory(DATA_DRIVE_AND_FOLDER);
 		makeDirectory(DATA_IN_FOLDER);
 		makeDirectory(DATA_OUT_FOLDER);
 
