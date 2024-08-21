@@ -70,8 +70,9 @@ public class PassCryptDataEncrypter {
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
 
+		// set this to true to do live data from CERN
 		if (DO_HOME_LOCATION) {
-			DATA_IN_FOLDER = "E:\\Documents\\Personal\\";
+			DATA_IN_FOLDER = "E:\\Documents\\";
 			DATA_OUT_FOLDER = "C:\\GitRepos\\PassCrypt\\app\\src\\main\\res\\raw\\";
 		}
 
