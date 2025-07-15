@@ -127,9 +127,15 @@ public class PassCryptDataEncrypter {
 				if (node.getTextContent().equals("true")) {
 					Element parentElement = (Element) node.getParentNode();
 					if (!parentElement.getNodeName().equals("SitePasswords")) {
+//						System.out.println("COPYING: " + parentElement.getNodeName());
 						Element copiedNode = copyElement(parentElement, copiedDoc);
 						newRootElement.appendChild(copiedNode);
 					}
+				} else {
+//					Element parentElement = (Element) node.getParentNode();
+//					if (!parentElement.getNodeName().equals("SitePasswords")) {
+//						System.out.println("NOT COPYING: " + parentElement.getNodeName());
+//					}
 				}
 			}
 			saveXMLDocument(copiedDoc, targetDoc);
