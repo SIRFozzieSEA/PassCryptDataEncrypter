@@ -63,6 +63,7 @@ public class PassCryptDataEncrypter {
 
 	private static final String EXPORT_FOR_PHONE_CONSTANT = "Export_For_Phone";
 	private static final String ENCRYPTED_CONST = "ENCRYPTED";
+	private static final boolean SHOW_DEBUGS = true;
 
 	private static List<String> cleanupLinesThatContain = new ArrayList<String>();
 
@@ -127,15 +128,19 @@ public class PassCryptDataEncrypter {
 				if (node.getTextContent().equals("true")) {
 					Element parentElement = (Element) node.getParentNode();
 					if (!parentElement.getNodeName().equals("SitePasswords")) {
-//						System.out.println("COPYING: " + parentElement.getNodeName());
+						if (SHOW_DEBUGS) {
+							System.out.println("COPYING: " + parentElement.getNodeName());
+						}
 						Element copiedNode = copyElement(parentElement, copiedDoc);
 						newRootElement.appendChild(copiedNode);
 					}
 				} else {
-//					Element parentElement = (Element) node.getParentNode();
-//					if (!parentElement.getNodeName().equals("SitePasswords")) {
-//						System.out.println("NOT COPYING: " + parentElement.getNodeName());
-//					}
+					if (SHOW_DEBUGS) {
+						Element parentElement = (Element) node.getParentNode();
+						if (!parentElement.getNodeName().equals("SitePasswords")) {
+							System.out.println("NOT COPYING: " + parentElement.getNodeName());
+						}
+					}
 				}
 			}
 			saveXMLDocument(copiedDoc, targetDoc);
@@ -378,44 +383,34 @@ public class PassCryptDataEncrypter {
 
 	// grabing the default username
 	/*
-	String userName = "PROBLEM_NO_USERNAME_FOUND";
-	try {
-		userName = element.getElementsByTagName("Username").item(0).getTextContent();
-		if (!userName.contains("@")) {
-			userName = "PROBLEM_NO_EMAIL_FOUND";
-		}
-	} catch (Exception e) {
-	}
-	*/
+	 * String userName = "PROBLEM_NO_USERNAME_FOUND"; try { userName =
+	 * element.getElementsByTagName("Username").item(0).getTextContent(); if
+	 * (!userName.contains("@")) { userName = "PROBLEM_NO_EMAIL_FOUND"; } } catch
+	 * (Exception e) { }
+	 */
 
 	// Make sure there is a EMail_Address node, if not, create node with possible
 	// e-mail being the username
 	/*
-	try {
-		element.getElementsByTagName("EMail_Address").item(0).getTextContent();
-	} catch (Exception e) {
-		Element textNodeElement = document.createElement("EMail_Address");
-		Text textNode = document.createTextNode(userName);
-		textNodeElement.appendChild(textNode);
-		element.appendChild(textNodeElement);
-	}
-	*/
+	 * try { element.getElementsByTagName("EMail_Address").item(0).getTextContent();
+	 * } catch (Exception e) { Element textNodeElement =
+	 * document.createElement("EMail_Address"); Text textNode =
+	 * document.createTextNode(userName); textNodeElement.appendChild(textNode);
+	 * element.appendChild(textNodeElement); }
+	 */
 
 	// make sure it has a password node
 	/*
-	try {
-		element.getElementsByTagName("Password").item(0).getTextContent();
-	} catch (Exception e) {
-		System.out.println("Password missing for " + nodeName);
-	}
-	*/
+	 * try { element.getElementsByTagName("Password").item(0).getTextContent(); }
+	 * catch (Exception e) { System.out.println("Password missing for " + nodeName);
+	 * }
+	 */
 
 	// Add the export for vacation feature
 	/*
-	Element textNodeElement = document.createElement("Export_For_Phone");
-	Text textNode = document.createTextNode("false");
-	textNodeElement.appendChild(textNode);
-	element.appendChild(textNodeElement);
-	*/
+	 * Element textNodeElement = document.createElement("Export_For_Phone"); Text
+	 * textNode = document.createTextNode("false");
+	 * textNodeElement.appendChild(textNode); element.appendChild(textNodeElement);
+	 */
 
 }
