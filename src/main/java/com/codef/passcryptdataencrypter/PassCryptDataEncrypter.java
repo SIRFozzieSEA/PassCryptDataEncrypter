@@ -129,7 +129,13 @@ public class PassCryptDataEncrypter {
 					Element parentElement = (Element) node.getParentNode();
 					if (!parentElement.getNodeName().equals("SitePasswords")) {
 						if (SHOW_DEBUGS) {
-							System.out.println("COPYING: " + parentElement.getNodeName());
+							String category = "";
+							NodeList categoryNodes = parentElement.getElementsByTagName("Export_Category");
+							if (categoryNodes.getLength() > 0) {
+							    category = categoryNodes.item(0).getTextContent();
+							}
+							
+							System.out.println(parentElement.getNodeName() + "\t" + category + "\tCOPYING");
 						}
 						Element copiedNode = copyElement(parentElement, copiedDoc);
 						newRootElement.appendChild(copiedNode);
@@ -138,7 +144,13 @@ public class PassCryptDataEncrypter {
 					if (SHOW_DEBUGS) {
 						Element parentElement = (Element) node.getParentNode();
 						if (!parentElement.getNodeName().equals("SitePasswords")) {
-							System.out.println("NOT COPYING: " + parentElement.getNodeName());
+							String category = "";
+							NodeList categoryNodes = parentElement.getElementsByTagName("Export_Category");
+							if (categoryNodes.getLength() > 0) {
+							    category = categoryNodes.item(0).getTextContent();
+							}
+							
+							System.out.println(parentElement.getNodeName() + "\t" + category + "\tSKIPPING");
 						}
 					}
 				}
