@@ -63,7 +63,7 @@ public class PassCryptDataEncrypter {
 
 	private static final String EXPORT_FOR_PHONE_CONSTANT = "Export_For_Phone";
 	private static final String ENCRYPTED_CONST = "ENCRYPTED";
-	private static final boolean SHOW_DEBUGS = true;
+	private static final boolean SHOW_DEBUGS = false;
 
 	private static List<String> cleanupLinesThatContain = new ArrayList<String>();
 
@@ -132,9 +132,9 @@ public class PassCryptDataEncrypter {
 							String category = "";
 							NodeList categoryNodes = parentElement.getElementsByTagName("Export_Category");
 							if (categoryNodes.getLength() > 0) {
-							    category = categoryNodes.item(0).getTextContent();
+								category = categoryNodes.item(0).getTextContent();
 							}
-							
+
 							System.out.println(parentElement.getNodeName() + "\t" + category + "\tCOPYING");
 						}
 						Element copiedNode = copyElement(parentElement, copiedDoc);
@@ -147,9 +147,9 @@ public class PassCryptDataEncrypter {
 							String category = "";
 							NodeList categoryNodes = parentElement.getElementsByTagName("Export_Category");
 							if (categoryNodes.getLength() > 0) {
-							    category = categoryNodes.item(0).getTextContent();
+								category = categoryNodes.item(0).getTextContent();
 							}
-							
+
 							System.out.println(parentElement.getNodeName() + "\t" + category + "\tSKIPPING");
 						}
 					}
@@ -177,11 +177,16 @@ public class PassCryptDataEncrypter {
 		for (int i = 0; i < childNodes.getLength(); i++) {
 			Node child = childNodes.item(i);
 			if (child.getNodeType() == Node.ELEMENT_NODE) {
-				Element copiedChildElement = copyElement((Element) child, targetDocument);
-				copiedElement.appendChild(copiedChildElement);
+				if (child.getNodeName().equals("URL")) {
+					Element copiedChildElement = copyElement((Element) child, targetDocument);
+					copiedElement.appendChild(copiedChildElement);
+				}
 			} else if (child.getNodeType() == Node.TEXT_NODE) {
-				Text copiedText = targetDocument.createTextNode(child.getTextContent());
-				copiedElement.appendChild(copiedText);
+				if (child.getParentNode().getNodeName().equals("URL")) {
+					Text copiedText = targetDocument.createTextNode(child.getTextContent());
+					copiedElement.appendChild(copiedText);
+				}
+
 			}
 		}
 
