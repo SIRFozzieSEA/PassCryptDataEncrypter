@@ -123,6 +123,8 @@ public class PassCryptDataEncrypter {
 			copiedDoc.appendChild(newRootElement);
 
 			NodeList nodeList = originalDoc.getElementsByTagName(EXPORT_FOR_PHONE_CONSTANT);
+			System.out.println("Total nodes to check: " + nodeList.getLength());
+			
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Node node = nodeList.item(i);
 				if (node.getTextContent().equals("true")) {
