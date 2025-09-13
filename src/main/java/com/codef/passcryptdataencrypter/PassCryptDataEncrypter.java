@@ -185,8 +185,7 @@ public class PassCryptDataEncrypter {
 				}
 			} else if (child.getNodeType() == Node.TEXT_NODE) {
 				if (isExportableNode(child.getParentNode())) {
-					System.out.println(
-							"Text Node: " + child.getParentNode().getNodeName() + ", " + child.getTextContent());
+					// System.out.println("Text Node: " + child.getParentNode().getNodeName() + ", " + child.getTextContent());
 					Text copiedText = targetDocument.createTextNode(child.getTextContent());
 					copiedElement.appendChild(copiedText);
 				}
@@ -330,7 +329,7 @@ public class PassCryptDataEncrypter {
 					sb.append("\t" + "User Name: " + userName + "\n");
 					sb.append("\t" + " Password: " + password + "\n");
 
-					System.out.println(sb.toString());
+					// System.out.println(sb.toString());
 
 					writeStringToFile(sb.toString(), DATA_OUT_FOLDER + nodeName.toLowerCase() + ".txt");
 					encryptFile(DATA_OUT_FOLDER + nodeName.toLowerCase() + ".txt",
