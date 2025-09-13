@@ -124,7 +124,7 @@ public class PassCryptDataEncrypter {
 
 			NodeList nodeList = originalDoc.getElementsByTagName(EXPORT_FOR_PHONE_CONSTANT);
 			System.out.println("Total nodes to check: " + nodeList.getLength());
-			
+
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Node node = nodeList.item(i);
 				if (node.getTextContent().equals("true")) {
@@ -179,12 +179,14 @@ public class PassCryptDataEncrypter {
 		for (int i = 0; i < childNodes.getLength(); i++) {
 			Node child = childNodes.item(i);
 			if (child.getNodeType() == Node.ELEMENT_NODE) {
-				if (child.getNodeName().equals("URL")) {
+				if (isExportableNode(child)) {
 					Element copiedChildElement = copyElement((Element) child, targetDocument);
 					copiedElement.appendChild(copiedChildElement);
 				}
 			} else if (child.getNodeType() == Node.TEXT_NODE) {
-				if (child.getParentNode().getNodeName().equals("URL")) {
+				if (isExportableNode(child.getParentNode())) {
+					System.out.println(
+							"Text Node: " + child.getParentNode().getNodeName() + ", " + child.getTextContent());
 					Text copiedText = targetDocument.createTextNode(child.getTextContent());
 					copiedElement.appendChild(copiedText);
 				}
@@ -193,6 +195,14 @@ public class PassCryptDataEncrypter {
 		}
 
 		return copiedElement;
+	}
+
+	private static boolean isExportableNode(Node testNode) {
+		if (testNode.getNodeName().equals("URL") || testNode.getNodeName().equals("Username")
+				|| testNode.getNodeName().equals("Password") || testNode.getNodeName().equals("EMail_Address")) {
+			return true;
+		}
+		return false;
 	}
 
 	private static void saveXMLDocument(Document document, String targetDoc) throws TransformerException {
@@ -319,6 +329,8 @@ public class PassCryptDataEncrypter {
 					sb.append("\t" + "   E-Mail: " + email + "\n");
 					sb.append("\t" + "User Name: " + userName + "\n");
 					sb.append("\t" + " Password: " + password + "\n");
+
+					System.out.println(sb.toString());
 
 					writeStringToFile(sb.toString(), DATA_OUT_FOLDER + nodeName.toLowerCase() + ".txt");
 					encryptFile(DATA_OUT_FOLDER + nodeName.toLowerCase() + ".txt",
