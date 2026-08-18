@@ -74,7 +74,7 @@ public class PassCryptDataEncrypter {
 		// set this to true to do live data from CERN
 		if (DO_HOME_LOCATION) {
 			DATA_IN_FOLDER = "E:\\Documents\\";
-			DATA_OUT_FOLDER = "C:\\GitRepos\\PassCrypt\\app\\src\\main\\res\\raw\\";
+			DATA_OUT_FOLDER = "C:\\GitRepos\\AndroidProjects\\PassCrypt\\app\\src\\main\\res\\raw\\";
 		}
 
 		// These are my standard cleanup lines in my template
