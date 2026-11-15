@@ -48,10 +48,10 @@ import org.w3c.dom.Text;
 public class PassCryptDataEncrypter {
 
 	/* Safe to configure as needed */
-	private static String PASSWORD_FOR_PASSCRYPT_APP = "bobolala69!";
-	private static String DATA_FOLDER = "E:\\PassCryptDataEncrypter\\";
-	private static String DATA_IN_FOLDER = DATA_FOLDER + "IN\\";
-	private static String DATA_OUT_FOLDER = DATA_FOLDER + "OUT\\";
+	private static String PASSWORD_FOR_PASSCRYPT_APP = "boboshan!";
+	private static String DATA_FOLDER = "/home/sirfozzie/Documents/Online and Software/PassCryptDataEncrypter";
+	private static String DATA_IN_FOLDER = DATA_FOLDER + "IN/";
+	private static String DATA_OUT_FOLDER = DATA_FOLDER + "OUT/";
 	private static final boolean DO_HOME_LOCATION = false;
 
 	/* probably don't want to mess with these */
@@ -73,8 +73,8 @@ public class PassCryptDataEncrypter {
 
 		// set this to true to do live data from CERN
 		if (DO_HOME_LOCATION) {
-			DATA_IN_FOLDER = "E:\\Documents\\";
-			DATA_OUT_FOLDER = "C:\\GitRepos\\AndroidProjects\\PassCrypt\\app\\src\\main\\res\\raw\\";
+			DATA_IN_FOLDER = "/home/sirfozzie/Documents/Online and Software/";
+			DATA_OUT_FOLDER = "/home/sirfozzie/GitRepos/PassCrypt/app/src/main/res/raw/";
 		}
 
 		// These are my standard cleanup lines in my template
